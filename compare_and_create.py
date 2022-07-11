@@ -3,6 +3,7 @@ import numpy as np
 import sys
 DEFAULT_PARAM=sys.argv[1]
 MODIFIED_PARAM=sys.argv[2]
+PARAM_CODE = sys.argv[3]
 #import text file into NumPy array as integer
 data_DEFAULT = loadtxt(DEFAULT_PARAM, dtype='str')
 data_MODIFIED = loadtxt(MODIFIED_PARAM, dtype='str')
@@ -49,7 +50,34 @@ for b in range(len(data_MODIFIED)):
         #print(ARR_DATA_MODIFIED[b] + " ---- " + " NON ESISTE IN DEFAULT")
         
 FINAL_ARRAY = data_REFERENCE + data_NOT_EXIST_IN_DEFAULT
-for z in range(len(FINAL_ARRAY)):
-    print(FINAL_ARRAY[z])
-print(FINAL_ARRAY)
+#create string
+FINAL_ARRAY_STRING = ""
+for z in range(len(FINAL_ARRAY)) :
+    if(z+1==len(FINAL_ARRAY)):
+        print("ok")
+        FINAL_ARRAY_STRING += "'" + (FINAL_ARRAY[z])+"'"
+        break
+
+        
+    FINAL_ARRAY_STRING += "'" + (FINAL_ARRAY[z])+"'"+","
+    
+    
+#create LUA with new parameters
+print(FINAL_ARRAY_STRING)
+
+# Read in the file
+with open('DEFAULT_TEXT_LUA\write_param.lua', 'r') as file :
+  filedata = file.read()
+
+# Replace the target string
+filedata = filedata.replace('PARAM_DEFAULT_TEXT', FINAL_ARRAY_STRING)
+filedata = filedata.replace('local param_code_lua = default', "local param_code_lua = "+PARAM_CODE)
+
+# Write the file out again
+with open('OUTPUT_LUA_SCRIPT\LUA_SCRIPT.lua', 'w') as file:
+  file.write(filedata)
+
+
+
+#print(FINAL_ARRAY)
 scelta=input("Press key")
