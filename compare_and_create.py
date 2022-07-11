@@ -12,6 +12,9 @@ ARR_DATA_MODIFIED = []
 data_NAME_DEFAULT = []
 #LIST FOR READING
 ARR_DATA_MODIFIED_READING = []
+print("DEFAULT PARAMETER LIST : " + DEFAULT_PARAM)
+print("MODIFIED PARAMETER LIST : " + MODIFIED_PARAM)
+print("PARAM CODE DATE : " + PARAM_CODE)
 #TRANSFER ARRAY
 
 for z in range(len(data_DEFAULT)):
@@ -33,7 +36,7 @@ for i in range(len(data_DEFAULT)):
 #create 2 array only name
 
 #CHECK IF EXIST
-
+print("Creating array reference ... ")
 for b in range(len(data_MODIFIED)):
 
     if (ARR_DATA_MODIFIED[b].split(",")[0]  in data_NAME_DEFAULT):
@@ -50,11 +53,13 @@ for b in range(len(data_MODIFIED)):
         #print(ARR_DATA_MODIFIED[b] + " ---- " + " NON ESISTE IN DEFAULT")
         
 FINAL_ARRAY = data_REFERENCE + data_NOT_EXIST_IN_DEFAULT
+print("Reference Created !")
+
+print("Creating LUA ...")
 #create string
 FINAL_ARRAY_STRING = ""
 for z in range(len(FINAL_ARRAY)) :
     if(z+1==len(FINAL_ARRAY)):
-        print("ok")
         FINAL_ARRAY_STRING += "'" + (FINAL_ARRAY[z])+"'"
         break
 
@@ -63,10 +68,10 @@ for z in range(len(FINAL_ARRAY)) :
     
     
 #create LUA with new parameters
-print(FINAL_ARRAY_STRING)
+
 
 # Read in the file
-with open('DEFAULT_TEXT_LUA\write_param.lua', 'r') as file :
+with open('DEFAULT_TEXT_LUA\default.lua', 'r') as file :
   filedata = file.read()
 
 # Replace the target string
@@ -74,10 +79,11 @@ filedata = filedata.replace('PARAM_DEFAULT_TEXT', FINAL_ARRAY_STRING)
 filedata = filedata.replace('local param_code_lua = default', "local param_code_lua = "+PARAM_CODE)
 
 # Write the file out again
-with open('OUTPUT_LUA_SCRIPT\LUA_SCRIPT.lua', 'w') as file:
+with open('OUTPUT_LUA_SCRIPT\SCRIPT_LUA_PARAMETERS.lua', 'w') as file:
   file.write(filedata)
 
-
+print("Lua Created ! ")
+print("Saved in OUTPUT_LUA_SCRIPT/ as SCRIPT_LUA_PARAMETERS.lua")
 
 #print(FINAL_ARRAY)
 scelta=input("Press key")
