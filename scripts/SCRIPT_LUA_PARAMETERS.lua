@@ -1,5 +1,7 @@
 --param_code , this is the code that identify the parameter_list 
 
+gcs:send_text(0,"LS VER 1.0")
+
 local param_code_lua = 220712
 
 -- let arducopter know of parameter LB_PARAM_CODE

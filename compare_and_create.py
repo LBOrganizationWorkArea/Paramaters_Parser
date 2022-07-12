@@ -79,11 +79,11 @@ filedata = filedata.replace('PARAM_DEFAULT_TEXT', FINAL_ARRAY_STRING)
 filedata = filedata.replace('local param_code_lua = default', "local param_code_lua = "+PARAM_CODE)
 
 # Write the file out again
-with open('OUTPUT_LUA_SCRIPT\SCRIPT_LUA_PARAMETERS.lua', 'w') as file:
+with open('scripts\SCRIPT_LUA_PARAMETERS.lua', 'w') as file:
   file.write(filedata)
 
 print("Lua Created ! ")
-print("Saved in OUTPUT_LUA_SCRIPT/ as SCRIPT_LUA_PARAMETERS.lua")
+print("Saved in scripts/ as SCRIPT_LUA_PARAMETERS.lua")
 
 #print(FINAL_ARRAY)
-scelta=input("Press key")
+scelta=input("Press key to exit")
