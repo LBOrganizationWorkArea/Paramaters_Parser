@@ -10,6 +10,17 @@ data_MODIFIED = loadtxt(MODIFIED_PARAM, dtype='str')
 ARR_DATA_DEFAULT = []
 ARR_DATA_MODIFIED = []
 data_NAME_DEFAULT = []
+
+#check date code
+
+if(len(PARAM_CODE)>6):
+    print("ERROR : INVALID CODE , example : 220710 - > 2022 Luglio 10")
+    exit()
+if(len(PARAM_CODE)<6):
+    print("ERROR : INVALID CODE , example : 220710 - > 2022 Luglio 10")
+    exit()
+
+
 #LIST FOR READING
 ARR_DATA_MODIFIED_READING = []
 print("DEFAULT PARAMETER LIST : " + DEFAULT_PARAM)
@@ -84,6 +95,11 @@ with open('scripts\SCRIPT_LUA_PARAMETERS.lua', 'w') as file:
 
 print("Lua Created ! ")
 print("Saved in scripts/ as SCRIPT_LUA_PARAMETERS.lua")
-
+#create reference .param
+print("Creating parameter list .param ...")
+with open("param_reference.param", "w") as txt_file:
+    for line in FINAL_ARRAY:
+        txt_file.write("".join(line) + "\n") # works with any number of elements in a line
 #print(FINAL_ARRAY)
+print("Parameter List created ! ...")
 scelta=input("Press key to exit")
